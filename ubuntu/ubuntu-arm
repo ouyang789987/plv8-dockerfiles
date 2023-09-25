@@ -53,7 +53,9 @@ RUN rm -rf /root/.vpython_cipd_cache /root/.vpython-root \
   && apt-get autoremove -y \
   && rm -rf /tmp/build /var/lib/apt/lists/*
 
-FROM ubuntu:14-22.04
+FROM ubuntu:22.04
+RUN apt update
+RUN apt-get install postgresql-14
 RUN mkdir -p /usr/lib/postgresql/${PG_MAJOR}/lib/
 ENV PLV8_VERSION=3.1.4
 COPY --from=plv8_build /usr/share/postgresql/${PG_MAJOR}/extension/ /usr/share/postgresql/${PG_MAJOR}/extension/
